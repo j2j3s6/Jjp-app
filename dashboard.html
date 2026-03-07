@@ -97,6 +97,12 @@ balance = balance - amount;
 
 localStorage.setItem("balance", balance);
 
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+history.push("Sent ₦" + amount);
+
+localStorage.setItem("history", JSON.stringify(history));
+
 updateBalance();
 
 alert("Money sent successfully");
@@ -120,6 +126,12 @@ if(amount > 0){
 balance = balance + amount;
 
 localStorage.setItem("balance", balance);
+
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+history.push("Received ₦" + amount);
+
+localStorage.setItem("history", JSON.stringify(history));
 
 updateBalance();
 
