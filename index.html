@@ -23,17 +23,11 @@ font-size:24px;
 .container{
 margin-top:40px;
 }
-
-.balance{
-background:white;
-padding:20px;
-margin:20px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
-}
-
-<button onclick="location.href='send.html'">Send Money</button>
-<br>
+<div class="balance">
+<h2>Your Balance</h2>
+<h3 id="balance">₦10000</h3>
+</div>
+<button onclick="sendMoney()">Send Money</button>
 
 <button onclick="location.href='receive.html'">Receive Money</button>
 <br>
@@ -42,3 +36,26 @@ box-shadow:0 2px 5px rgba(0,0,0,0.2);
 <br>
 
 <button onclick="location.href='history.html'">Transaction History</button>
+<script>
+
+let balance = 10000;
+
+function updateBalance(){
+document.getElementById("balance").innerText = "₦" + balance;
+}
+
+function sendMoney(){
+let amount = prompt("Enter amount to send:");
+
+if(amount <= balance){
+balance = balance - amount;
+updateBalance();
+alert("Money sent successfully");
+}
+else{
+alert("Insufficient balance");
+}
+
+}
+
+</script>
