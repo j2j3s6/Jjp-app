@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login - JJP Microfinance</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JJP Microfinance Login</title>
 
 <style>
-
 body{
 font-family: Arial;
-background:#f2f2f2;
 text-align:center;
 margin-top:100px;
+background:#f2f2f2;
 }
 
 input{
+display:block;
+margin:10px auto;
 padding:10px;
-margin:10px;
 width:200px;
 }
 
@@ -25,8 +24,8 @@ background:#0a7cff;
 color:white;
 border:none;
 border-radius:5px;
+cursor:pointer;
 }
-
 </style>
 
 </head>
@@ -35,9 +34,9 @@ border-radius:5px;
 
 <h2>JJP Microfinance Login</h2>
 
-<input type="text" id="username" placeholder="Username"><br>
+<input type="text" id="username" placeholder="Enter Username">
 
-<input type="password" id="password" placeholder="Password"><br>
+<input type="password" id="password" placeholder="Enter Password">
 
 <button onclick="login()">Login</button>
 
@@ -45,7 +44,7 @@ border-radius:5px;
 
 function login(){
 
-let let user = document.getElementById("username").value;
+let user = document.getElementById("username").value;
 let pass = document.getElementById("password").value;
 
 if(user === "admin" && pass === "1234"){
