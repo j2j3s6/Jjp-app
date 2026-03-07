@@ -145,6 +145,35 @@ window.location.href = "index.html";
 
 }
 
+<script>
+async function loadData() {
+    const url = "data.json";  
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        let table = document.getElementById("data-table");
+        table.innerHTML = "";
+
+        data.forEach(item => {
+            let row = `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td>${item.amount}</td>
+                    <td>${item.status}</td>
+                </tr>
+            `;
+            table.innerHTML += row;
+        });
+
+    } catch (error) {
+        console.error("Error loading data:", error);
+    }
+}
+
+loadData();
 </script>
 
 </body>
