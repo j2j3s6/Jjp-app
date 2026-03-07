@@ -7,11 +7,9 @@
 <style>
 
 body{
-font-family: Arial, sans-serif;
+font-family: Arial;
 background:#f2f2f2;
 text-align:center;
-margin:0;
-padding:0;
 }
 
 header{
@@ -21,17 +19,12 @@ padding:20px;
 font-size:24px;
 }
 
-.container{
-margin-top:30px;
-}
-
 .transaction{
 background:white;
 margin:10px auto;
 padding:10px;
 width:80%;
 border-radius:5px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
 button{
@@ -41,7 +34,6 @@ background:#0a7cff;
 color:white;
 border:none;
 border-radius:5px;
-cursor:pointer;
 }
 
 </style>
@@ -52,21 +44,21 @@ cursor:pointer;
 
 <header>Transaction History</header>
 
-<div class="container" id="history"></div>
+<div id="history"></div>
 
-<button onclick="goBack()">Back to Dashboard</button>
+<button onclick="back()">Back</button>
 
 <script>
 
-let historyList = JSON.parse(localStorage.getItem("history")) || [];
+let currentUser = localStorage.getItem("currentUser");
+
+let accounts = JSON.parse(localStorage.getItem("accounts")) || {};
 
 let container = document.getElementById("history");
 
-if(historyList.length === 0){
-container.innerHTML = "<p>No transactions yet</p>";
-}
+if(accounts[currentUser] && accounts[currentUser].history.length > 0){
 
-historyList.forEach(function(item){
+accounts[currentUser].history.forEach(function(item){
 
 let div = document.createElement("div");
 
@@ -78,8 +70,16 @@ container.appendChild(div);
 
 });
 
-function goBack(){
+}else{
+
+container.innerHTML = "<p>No transactions yet</p>";
+
+}
+
+function back(){
+
 window.location.href = "dashboard.html";
+
 }
 
 </script>
