@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JJP Microfinance Dashboard</title>
+<title>Dashboard</title>
 
 <style>
 
@@ -11,7 +11,6 @@ font-family: Arial, sans-serif;
 background:#f2f2f2;
 text-align:center;
 margin:0;
-padding:0;
 }
 
 header{
@@ -60,8 +59,6 @@ background:#084dbf;
 
 <br>
 
-<button onclick="location.href='loan.html'">Loan</button>
-
 <button onclick="location.href='history.html'">Transaction History</button>
 
 <br><br>
@@ -70,38 +67,41 @@ background:#084dbf;
 
 <script>
 
-let balance = localStorage.getItem("balance");
+let currentUser = localStorage.getItem("currentUser");
 
-if(balance === null){
-balance = 10000;
-localStorage.setItem("balance", balance);
+if(!currentUser){
+window.location.href = "index.html";
 }
 
-balance = Number(balance);
+let accounts = JSON.parse(localStorage.getItem("accounts")) || {};
+
+if(!accounts[currentUser]){
+accounts[currentUser] = {
+balance:10000,
+history:[]
+};
+}
 
 updateBalance();
 
 function updateBalance(){
-document.getElementById("balance").innerText = "₦" + balance;
+
+document.getElementById("balance").innerText =
+"₦" + accounts[currentUser].balance;
+
+localStorage.setItem("accounts", JSON.stringify(accounts));
+
 }
 
 function sendMoney(){
 
-let amount = prompt("Enter amount to send");
+let amount = Number(prompt("Enter amount to send"));
 
-amount = Number(amount);
+if(amount > 0 && amount <= accounts[currentUser].balance){
 
-if(amount > 0 && amount <= balance){
+accounts[currentUser].balance -= amount;
 
-balance = balance - amount;
-
-localStorage.setItem("balance", balance);
-
-let history = JSON.parse(localStorage.getItem("history")) || [];
-
-history.push("Sent ₦" + amount);
-
-localStorage.setItem("history", JSON.stringify(history));
+accounts[currentUser].history.push("Sent ₦" + amount);
 
 updateBalance();
 
@@ -109,7 +109,7 @@ alert("Money sent successfully");
 
 }else{
 
-alert("Invalid amount or insufficient balance");
+alert("Invalid amount");
 
 }
 
@@ -117,21 +117,13 @@ alert("Invalid amount or insufficient balance");
 
 function receiveMoney(){
 
-let amount = prompt("Enter amount received");
-
-amount = Number(amount);
+let amount = Number(prompt("Enter amount received"));
 
 if(amount > 0){
 
-balance = balance + amount;
+accounts[currentUser].balance += amount;
 
-localStorage.setItem("balance", balance);
-
-let history = JSON.parse(localStorage.getItem("history")) || [];
-
-history.push("Received ₦" + amount);
-
-localStorage.setItem("history", JSON.stringify(history));
+accounts[currentUser].history.push("Received ₦" + amount);
 
 updateBalance();
 
@@ -146,6 +138,8 @@ alert("Invalid amount");
 }
 
 function logout(){
+
+localStorage.removeItem("currentUser");
 
 window.location.href = "index.html";
 
