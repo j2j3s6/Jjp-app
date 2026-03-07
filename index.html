@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JJP Microfinance Login</title>
 
 <style>
 body{
-font-family: Arial;
-text-align:center;
-margin-top:100px;
+font-family: Arial, sans-serif;
 background:#f2f2f2;
+text-align:center;
+margin-top:120px;
+}
+
+h2{
+margin-bottom:20px;
 }
 
 input{
 display:block;
 margin:10px auto;
 padding:10px;
-width:200px;
+width:220px;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
@@ -25,6 +32,10 @@ color:white;
 border:none;
 border-radius:5px;
 cursor:pointer;
+}
+
+button:hover{
+background:#0866d6;
 }
 </style>
 
@@ -42,15 +53,15 @@ cursor:pointer;
 
 <script>
 
-function login(){
+function login() {
 
-let user = document.getElementById("username").value;
-let pass = document.getElementById("password").value;
+var user = document.getElementById("username").value;
+var pass = document.getElementById("password").value;
 
-if(user === "admin" && pass === "1234"){
+if (user === "admin" && pass === "1234") {
 window.location.href = "dashboard.html";
-}
-else{
+} 
+else {
 alert("Invalid login details");
 }
 
