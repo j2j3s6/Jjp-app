@@ -1,14 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transaction History</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f2f2f2;
+text-align:center;
+margin:0;
+padding:0;
+}
+
+header{
+background:#0a7cff;
+color:white;
+padding:20px;
+font-size:24px;
+}
+
+.container{
+margin-top:30px;
+}
+
+.transaction{
+background:white;
+margin:10px auto;
+padding:10px;
+width:80%;
+border-radius:5px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+button{
+padding:10px 20px;
+margin-top:20px;
+background:#0a7cff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+
 </head>
 
-<body style="font-family:Arial;text-align:center;">
+<body>
 
-<h2>Transaction History</h2>
+<header>Transaction History</header>
 
-<p>No transactions yet.</p>
+<div class="container" id="history"></div>
+
+<button onclick="goBack()">Back to Dashboard</button>
+
+<script>
+
+let historyList = JSON.parse(localStorage.getItem("history")) || [];
+
+let container = document.getElementById("history");
+
+if(historyList.length === 0){
+container.innerHTML = "<p>No transactions yet</p>";
+}
+
+historyList.forEach(function(item){
+
+let div = document.createElement("div");
+
+div.className = "transaction";
+
+div.innerText = item;
+
+container.appendChild(div);
+
+});
+
+function goBack(){
+window.location.href = "dashboard.html";
+}
+
+</script>
 
 </body>
 </html>
