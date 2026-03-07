@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>JJP Microfinance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JJP Microfinance Dashboard</title>
 
 <style>
+
 body{
-font-family: Arial;
+font-family: Arial, sans-serif;
 background:#f2f2f2;
 text-align:center;
 margin:0;
@@ -21,7 +22,7 @@ font-size:24px;
 }
 
 .balance{
-margin-top:40px;
+margin-top:30px;
 font-size:22px;
 }
 
@@ -37,8 +38,9 @@ cursor:pointer;
 }
 
 button:hover{
-background:#005fd1;
+background:#084dbf;
 }
+
 </style>
 
 </head>
@@ -49,40 +51,92 @@ background:#005fd1;
 
 <div class="balance">
 <h2>Your Balance</h2>
-<h3 id="balance">₦10000</h3>
+<h3 id="balance">₦0</h3>
 </div>
 
 <button onclick="sendMoney()">Send Money</button>
 
-<button onclick="location.href='receive.html'">Receive Money</button>
+<button onclick="receiveMoney()">Receive Money</button>
+
 <br>
 
 <button onclick="location.href='loan.html'">Loan</button>
-<br>
 
 <button onclick="location.href='history.html'">Transaction History</button>
 
+<br><br>
+
+<button onclick="logout()">Logout</button>
+
 <script>
 
-let balance = 10000;
+let balance = localStorage.getItem("balance");
+
+if(balance === null){
+balance = 10000;
+localStorage.setItem("balance", balance);
+}
+
+balance = Number(balance);
+
+updateBalance();
 
 function updateBalance(){
 document.getElementById("balance").innerText = "₦" + balance;
 }
 
 function sendMoney(){
+
 let amount = prompt("Enter amount to send");
 
 amount = Number(amount);
 
-if(amount <= balance){
+if(amount > 0 && amount <= balance){
+
 balance = balance - amount;
+
+localStorage.setItem("balance", balance);
+
 updateBalance();
+
 alert("Money sent successfully");
+
+}else{
+
+alert("Invalid amount or insufficient balance");
+
 }
-else{
-alert("Insufficient balance");
+
 }
+
+function receiveMoney(){
+
+let amount = prompt("Enter amount received");
+
+amount = Number(amount);
+
+if(amount > 0){
+
+balance = balance + amount;
+
+localStorage.setItem("balance", balance);
+
+updateBalance();
+
+alert("Money received successfully");
+
+}else{
+
+alert("Invalid amount");
+
+}
+
+}
+
+function logout(){
+
+window.location.href = "index.html";
+
 }
 
 </script>
