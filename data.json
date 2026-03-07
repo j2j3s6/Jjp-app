@@ -1,0 +1,14 @@
+[
+ {
+  "name": "John",
+  "email": "john@email.com",
+  "amount": "200",
+  "status": "Paid"
+ },
+ {
+  "name": "Mary",
+  "email": "mary@email.com",
+  "amount": "150",
+  "status": "Pending"
+ }
+]
