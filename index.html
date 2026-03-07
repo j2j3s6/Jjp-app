@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>JJP Microfinance</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
@@ -20,23 +20,48 @@ padding:20px;
 font-size:24px;
 }
 
-.container{
+.balance{
 margin-top:40px;
+font-size:22px;
+}
+
+button{
+padding:12px 20px;
+margin:10px;
+font-size:16px;
+border:none;
+border-radius:5px;
+background:#0a7cff;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#005fd1;
 }
 </style>
+
+</head>
+
+<body>
+
+<header>JJP Microfinance</header>
+
 <div class="balance">
 <h2>Your Balance</h2>
 <h3 id="balance">₦10000</h3>
 </div>
+
 <button onclick="sendMoney()">Send Money</button>
 
 <button onclick="location.href='receive.html'">Receive Money</button>
 <br>
 
-<button onclick="location.href='loan.html'">Request Loan</button>
+<button onclick="location.href='loan.html'">Loan</button>
 <br>
 
 <button onclick="location.href='history.html'">Transaction History</button>
+
 <script>
 
 let balance = 10000;
@@ -46,7 +71,9 @@ document.getElementById("balance").innerText = "₦" + balance;
 }
 
 function sendMoney(){
-let amount = prompt("Enter amount to send:");
+let amount = prompt("Enter amount to send");
+
+amount = Number(amount);
 
 if(amount <= balance){
 balance = balance - amount;
@@ -56,7 +83,9 @@ alert("Money sent successfully");
 else{
 alert("Insufficient balance");
 }
-
 }
 
 </script>
+
+</body>
+</html>
