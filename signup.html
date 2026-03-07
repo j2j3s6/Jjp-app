@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f2f2f2;
+text-align:center;
+margin-top:120px;
+}
+
+input{
+display:block;
+margin:10px auto;
+padding:10px;
+width:220px;
+}
+
+button{
+padding:10px 20px;
+background:#0a7cff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Create Account</h2>
+
+<input type="text" id="newuser" placeholder="Choose Username">
+
+<input type="password" id="newpass" placeholder="Choose Password">
+
+<button onclick="signup()">Create Account</button>
+
+<br><br>
+
+<button onclick="goLogin()">Back to Login</button>
+
+<script>
+
+function signup(){
+
+let user = document.getElementById("newuser").value;
+let pass = document.getElementById("newpass").value;
+
+if(user === "" || pass === ""){
+alert("Please fill all fields");
+return;
+}
+
+let users = JSON.parse(localStorage.getItem("users")) || {};
+
+users[user] = pass;
+
+localStorage.setItem("users", JSON.stringify(users));
+
+alert("Account created successfully");
+
+window.location.href = "index.html";
+
+}
+
+function goLogin(){
+window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>
